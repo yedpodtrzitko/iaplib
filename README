@@ -1,0 +1,24 @@
+In-App Purchase Library
+=======================
+
+A library for a basic in-app payments verification
+
+
+Supported vendors
+-----------------
+
+* Google Play
+
+* AppStore
+
+* Amazon
+
+* Facebook
+
+
+
+TODO
+----
+
+A lot
+

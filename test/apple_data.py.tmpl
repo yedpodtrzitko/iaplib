@@ -1,0 +1,85 @@
+from uuid import uuid4
+
+from iaplib.provider.apple import ApplePayment
+
+
+class AppleTestData(object):
+    RAW_RECEIPT_DATA = ""
+
+    GAME_ID = 'net.vanyli.helios_payment'
+
+    VERIFY_RESPONSE = {
+        "status": 0,
+        "receipt": {
+            "purchase_date_pst": "2016-11-20 18:32:38 Europe/Prague",
+            "product_id": "PenguinSkin",
+            "original_transaction_id": "1000000056161764",
+            "unique_identifier": "42c1b3d45563820dd9a59c79a75641001fc85e39",
+            "original_purchase_date_pst": "2016-11-20 18:32:38 Europe/Prague",
+            "original_purchase_date": "2016-11-21 02:32:38 Etc/GMT",
+            "bvrs": "1.0",
+            "original_purchase_date_ms": "1231231231231",
+            "purchase_date": "2016-11-21 02:32:38 Etc/GMT",
+            "item_id": "554499305",
+            "purchase_date_ms": "1231231231231",
+            "bid": "net.vanyli.planet",
+            "transaction_id": "1234567890",
+            "quantity": "1"
+        },
+    }
+
+    RECEIPT_DATA = (
+        '{'
+        '"signature" = "%(signature)s";'
+        '"purchase-info" = "ascii64";'
+        '"environment" = "Sandbox";'
+        '"pod" = "100";'
+        '"signing-status" = "0";'
+        '}'
+    )
+
+    RECEIPT_DATA_DECODED = {
+        'purchase_date_pst': u'2016-11-20 18:32:38 Europe/Prague',
+        'product_id': u'PenguinSkin',
+        'original_transaction_id': u'§1234567890',
+        'unique_identifier': u'42c1b3d45563820dd9a59c79a75641001fc85e39',
+        'original_purchase_date_pst': u'2016-11-20 18:32:38 Europe/Prague',
+        'original_purchase_date': u'2016-11-21 02:32:38 Etc/GMT',
+        'bvrs': u'1.0',
+        'original_purchase_date_ms': u'1231231231231',
+        'purchase_date': u'2016-11-21 02:32:38 Etc/GMT',
+        'item_id': u'554499305',
+        'purchase_date_ms': u'1231231231231',
+        'bid': u'net.vanyli.planet',
+        'transaction_id': u'1000000056161764',
+        'quantity': u'1',
+    }
+
+    signature = "AmoJ2C4XkkXWrx0l0p1EB2HjvwVFBO7sqhtOaZXYsmwoOnU8vCX5fIXUzJjpYZpTbum2aYndr/n8yAsg3Qw4YFG1KBlJKJ56sX3pJfY4YwhD2blvmeeZ0gAW+3bj0QXecQbNE99ogn+Ocjv6SwEHGivDHcAQ70b161zGim96XuJNAAADVzCCA1MwggI7oAMCAQICCGUUkU3ZWAS1MA0GCSqGSIb3DQEBBQUAMH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQKDApBcHBsZSBJbmMuMSYwJAYDVQQLDB1BcHBsZSBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTEzMDEGA1UEAwwqQXBwbGUgaVR1bmVzIFN0b3JlIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MB4XDTA5MDYxNTIyMDU1NloXDTE0MDYxNDIyMDU1NlowZDEjMCEGA1UEAwwaUHVyY2hhc2VSZWNlaXB0Q2VydGlmaWNhdGUxGzAZBgNVBAsMEkFwcGxlIGlUdW5lcyBTdG9yZTETMBEGA1UECgwKQXBwbGUgSW5jLjELMAkGA1UEBhMCVVMwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMrRjF2ct4IrSdiTChaI0g8pwv/cmHs8p/RwV/rt/91XKVhNl4XIBimKjQQNfgHsDs6yju++DrKJE7uKsphMddKYfFE5rGXsAdBEjBwRIxexTevx3HLEFGAt1moKx509dhxtiIdDgJv2YaVs49B0uJvNdy6SMqNNLHsDLzDS9oZHAgMBAAGjcjBwMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUNh3o4p2C0gEYtTJrDtdDC5FYQzowDgYDVR0PAQH/BAQDAgeAMB0GA1UdDgQWBBSpg4PyGUjFPhJXCBTMzaN+mV8k9TAQBgoqhkiG92NkBgUBBAIFADANBgkqhkiG9w0BAQUFAAOCAQEAEaSbPjtmN4C/IB3QEpK32RxacCDXdVXAeVReS5FaZxc+t88pQP93BiAxvdW/3eTSMGY5FbeAYL3etqP5gm8wrFojX0ikyVRStQ+/AQ0KEjtqB07kLs9QUe8czR8UGfdM1EumV/UgvDd4NwNYxLQMg4WTQfgkQQVy8GXZwVHgbE/UC6Y7053pGXBk51NPM3woxhd3gSRLvXj+loHsStcTEqe9pBDpmG5+sk4tw+GK3GMeEN5/+e1QT9np/Kl1nj+aBw7C0xsy0bFnaAd1cSS6xdory/CUvM6gtKsmnOOdqTesbp0bs8sn6Wqs0C9dgcxRHuOMZ2tm8npLUm7argOSzQ=="
+    invalid_signature = "Am7A11SyaJz20uV1wAKJmzmc2UH1lp3Wc4LJh7kdAUUH7jsEa3USs9XTw0G5jQuwPxcxI5+JcS2CxfUWGA0bnyUlQk0qrGhaNrCq3CRV89b9V0MNSyB6UBAko14wdfZQSXgirkdjJZhtcfJkTLwE/9bJv3DH2/FWNUZmfFkb5IMeAAADVzCCA1MwggI7oAMCAQICCGUUkU3ZWAS1MA0GCSqGSIb3DQEBBQUAMH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQKDApBcHBsZSBJbmMuMSYwJAYDVQQLDB1BcHBsZSBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTEzMDEGA1UEAwwqQXBwbGUgaVR1bmVzIFN0b3JlIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MB4XDTA5MDYxNTIyMDU1NloXDTE0MDYxNDIyMDU1NlowZDEjMCEGA1UEAwwaUHVyY2hhc2VSZWNlaXB0Q2VydGlmaWNhdGUxGzAZBgNVBAsMEkFwcGxlIGlUdW5lcyBTdG9yZTETMBEGA1UECgwKQXBwbGUgSW5jLjELMAkGA1UEBhMCVVMwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMrRjF2ct4IrSdiTChaI0g8pwv/cmHs8p/RwV/rt/91XKVhNl4XIBimKjQQNfgHsDs6yju++DrKJE7uKsphMddKYfFE5rGXsAdBEjBwRIxexTevx3HLEFGAt1moKx509dhxtiIdDgJv2YaVs49B0uJvNdy6SMqNNLHsDLzDS9oZHAgMBAAGjcjBwMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUNh3o4p2C0gEYtTJrDtdDC5FYQzowDgYDVR0PAQH/BAQDAgeAMB0GA1UdDgQWBBSpg4PyGUjFPhJXCBTMzaN+mV8k9TAQBgoqhkiG92NkBgUBBAIFADANBgkqhkiG9w0BAQUFAAOCAQEAEaSbPjtmN4C/IB3QEpK32RxacCDXdVXAeVReS5FaZxc+t88pQP93BiAxvdW/3eTSMGY5FbeAYL3etqP5gm8wrFojX0ikyVRStQ+/AQ0KEjtqB07kLs9QUe8czR8UGfdM1EumV/UgvDd4NwNYxLQMg4WTQfgkQQVy8GXZwVHgbE/UC6Y7053pGXBk51NPM3woxhd3gSRLvXj+loHsStcTEqe9pBDpmG5+sk4tw+GK3GMeEN5/+e1QT9np/Kl1nj+aBw7C0xsy0bFnaAd1cSS6xdory/CUvM6gtKsmnOOdqTesbp0bs8sn6Wqs0C9dgcxRHuOMZ2tm8npLUm7argOSzQ=="
+
+    input_data = {
+        'player_id': str(uuid4()),
+        'game_id': GAME_ID,
+        'platform': ApplePayment.STORE_ID,
+        'nonce': uuid4().hex,
+        'receipt': {
+            'payload': RAW_RECEIPT_DATA,  # self.RECEIPT_DATA % dict(signature=self.signature),
+        },
+    }
+
+    _root_key_pem = """-----BEGIN RSA PRIVATE KEY-----
+
+-----END RSA PRIVATE KEY-----"""
+
+    _root_cert_pem = """-----BEGIN CERTIFICATE-----
+
+-----END CERTIFICATE-----"""
+
+    apple_root_cert_pem = """-----BEGIN CERTIFICATE-----
+
+-----END CERTIFICATE-----"""
+
+    intermediate_certificate_pem = '''-----BEGIN CERTIFICATE-----
+
+-----END CERTIFICATE-----'''
