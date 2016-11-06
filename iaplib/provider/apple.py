@@ -2,7 +2,7 @@ import re
 import json
 
 from base64 import b64decode
-from struct import unpack, pack, iter_unpack
+from struct import unpack, pack
 
 import requests
 

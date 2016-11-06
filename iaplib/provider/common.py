@@ -19,19 +19,3 @@ class PaymentMixin:
     @abc.abstractproperty
     def STORE_ID(self):
         pass
-
-
-def get_vendor(provider_id):
-    from .google import GooglePayment
-    from .amazon import AmazonPayment
-    from .apple import ApplePayment
-
-    providers = {
-        GooglePayment.STORE_ID: GooglePayment,
-        AmazonPayment.STORE_ID: AmazonPayment,
-        ApplePayment.STORE_ID: ApplePayment,
-    }
-    try:
-        return providers[provider_id]
-    except KeyError:
-        raise InvalidDataError("unknown vendor supplied")

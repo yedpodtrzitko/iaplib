@@ -6,8 +6,7 @@ import json
 from uuid import uuid4
 from time import time
 
-
-from iaplib.provider.facebook import FacebookPayment
+from iaplib.provider import FacebookPayment
 
 
 class FacebookTestData(object):

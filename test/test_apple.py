@@ -4,7 +4,7 @@ import pytest
 from OpenSSL.crypto import load_certificate, FILETYPE_PEM, load_privatekey, PKey, TYPE_RSA, X509
 from cryptography.exceptions import InvalidSignature
 
-from iaplib.provider.apple import ApplePayment
+from iaplib.provider import ApplePayment
 from test.apple_data import AppleTestData
 
 

@@ -12,8 +12,8 @@ from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
 from cryptography.hazmat.backends.openssl.backend import Backend
 from cryptography.hazmat.primitives import hashes
 
-from iaplib.provider.common import InvalidDataError
-from iaplib.provider.google import GooglePayment
+from iaplib.provider import InvalidDataError
+from iaplib.provider import GooglePayment
 
 
 class GoogleTestData(object):

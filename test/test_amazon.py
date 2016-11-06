@@ -2,8 +2,7 @@ from copy import deepcopy
 
 import pytest
 
-from iaplib.provider.amazon import AmazonPayment
-from iaplib.provider.common import InvalidDataError
+from iaplib.provider import AmazonPayment, InvalidDataError
 
 
 class TestAmazon(object):
